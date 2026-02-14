@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day MARVIN💕💝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d3561 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(45, 53, 97, 0.85) 0%, rgba(58, 74, 122, 0.85) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background image layer */
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('./images/s6.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        /* Floating hearts animation */
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 8s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Screen styles */
+        .screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            overflow-y: auto;
+            z-index: 2;
+        }
+
+        /* Hide scrollbar for screens */
+        .screen::-webkit-scrollbar {
+            display: none;
+        }
+
+        .screen {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .screen.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .title {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 48px;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(135, 206, 235, 0.3);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #FFFFFF;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Gift box animation */
+        .gift-box {
+            font-size: 120px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Bear */
+        .bear {
+            font-size: 100px;
+            margin: 30px 0;
+            animation: wiggle 1s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Buttons */
+        .button {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .yes-button {
+            background: linear-gradient(135deg, #87CEEB, #4682B4);
+            color: white;
+        }
+
+        .no-button {
+            background: #2d3561;
+            color: #FFFFFF;
+            border: 2px solid #87CEEB;
+            transition: all 0.2s ease;
+        }
+
+        /* Gift options */
+        .gift-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .gift-grid .gift-option:nth-child(5) {
+            grid-column: 1 / -1;
+            max-width: 180px;
+            margin: 0 auto;
+        }
+
+        .gift-option {
+            background: rgba(45, 53, 97, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid rgba(135, 206, 235, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .gift-option:hover {
+            transform: translateY(-5px);
+            background: rgba(45, 53, 97, 0.5);
+            border-color: #87CEEB;
+            box-shadow: 0 8px 25px rgba(135, 206, 235, 0.3);
+        }
+
+        .gift-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        .gift-label {
+            font-size: 14px;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        /* Message screen */
+        .message-box {
+            background: transparent;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* Hide scrollbar for message-box */
+        .message-box::-webkit-scrollbar {
+            display: none;
+        }
+
+        .message-box {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .message-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #FFFFFF;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .message-text p {
+            margin-bottom: 15px;
+        }
+
+        .voucher {
+            background: linear-gradient(135deg, #3a4a7a, #4a5f9d);
+            border: 3px dashed #87CEEB;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .voucher-title {
+            font-size: 24px;
+            color: #FFFFFF;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .voucher-text {
+            font-size: 14px;
+            color: #FFFFFF;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            background: #4a5f9d;
+            color: #FFFFFF;
+            padding: 12px 30px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #5a6fad;
+            transform: translateY(-2px);
+        }
+
+        /* Photo grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .photo-placeholder {
+            background: linear-gradient(135deg, #87CEEB, #B0E0E6);
+            border-radius: 10px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .photo-placeholder:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder.has-image .photo-icon,
+        .photo-placeholder.has-image .photo-label {
+            display: none;
+        }
+
+        .photo-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .photo-label {
+            font-weight: bold;
+        }
+
+        .upload-button {
+            background: linear-gradient(135deg, #87CEEB, #4682B4);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(135, 206, 235, 0.3);
+        }
+
+        .upload-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(135, 206, 235, 0.5);
+        }
+
+        .hidden-input {
+            display: none;
+        }
+
+        .delete-photo {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .photo-placeholder.has-image:hover .delete-photo {
+            display: flex;
+        }
+
+        .delete-photo:hover {
+            background: #87CEEB;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Playlist styles */
+        .playlist {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .song-item {
+            background: linear-gradient(135deg, #2d3561 0%, #3a4a7a 100%);
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .song-item:hover {
+            transform: translateX(5px);
+            border-color: #87CEEB;
+            box-shadow: 0 5px 15px rgba(135, 206, 235, 0.3);
+        }
+
+        .song-item.playing {
+            background: linear-gradient(135deg, #4a5f9d 0%, #3a4a7a 100%);
+            border-color: #87CEEB;
+        }
+
+        .song-icon {
+            font-size: 30px;
+            flex-shrink: 0;
+        }
+
+        .song-info {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .song-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFFFFF;
+            margin-bottom: 5px;
+        }
+
+        .song-subtitle {
+            font-size: 12px;
+            color: #B0E0E6;
+            font-style: italic;
+        }
+
+        .play-btn {
+            font-size: 24px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .song-item:hover .play-btn {
+            transform: scale(1.2);
+        }
+
+        .music-player {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #3a4a7a 0%, #4a5f9d 100%);
+            border-radius: 15px;
+        }
+
+        .now-playing {
+            font-size: 14px;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Background image as direct element -->
+        <div class="background-image"></div>
+        
+        <!-- Floating hearts background -->
+        <div class="hearts" id="hearts"></div>
+
+        <!-- Screen 1: Welcome -->
+        <div class="screen active" id="screen1">
+            <div class="title">Hey my love</div>
+            <div class="subtitle">I made something special for you 💝</div>
+            <div class="subtitle" style="font-size: 14px; letter-spacing: 1px;">Unwrap your gift</div>
+            <div class="gift-box" onclick="nextScreen(2)">🎁</div>
+        </div>
+
+        <!-- Screen 2: Promise -->
+        <div class="screen" id="screen2">
+            <div class="subtitle">Trust me, you'll love it</div>
+            <div class="subtitle" style="font-size: 14px;">One more time, my love</div>
+            <div class="bear">🧸🎈</div>
+            <button class="button yes-button" onclick="nextScreen(3)">Continue</button>
+        </div>
+
+        <!-- Screen 3: Will you be my valentine -->
+        <div class="screen" id="screen3">
+            <div class="title" style="font-size: 36px;">Valentine? You + Me? 💘</div>
+            <div class="bear">🧸❤️‍🔥</div>
+            <div>
+                <button class="button yes-button" onclick="nextScreen(4)">Yes! 💕</button>
+                <button class="button no-button" id="noButton" onclick="handleNo()">No😭</button>
+            </div>
+        </div>
+
+        <!-- Screen 4: Choose a gift -->
+        <div class="screen" id="screen4">
+            <div class="title" style="font-size: 36px;">Hey Handsome Choose a gift🌹</div>
+            <div class="gift-grid">
+                <div class="gift-option" onclick="showGift('letter')">
+                    <div class="gift-icon">✉️💐</div>
+                    <div class="gift-label">LETTER</div>
+                </div>
+                <div class="gift-option" onclick="showGift('camera')">
+                    <div class="gift-icon">📷</div>
+                    <div class="gift-label">MEMORY</div>
+                </div>
+                <div class="gift-option" onclick="showGift('voucher')">
+                    <div class="gift-icon">🎟️</div>
+                    <div class="gift-label">VOUCHER</div>
+                </div>
+                <div class="gift-option" onclick="showGift('time')">
+                    <div class="gift-icon">🕐🫂</div>
+                    <div class="gift-label">TIME</div>
+                </div>
+                <div class="gift-option" onclick="showGift('music')">
+                    <div class="gift-icon">🎵</div>
+                    <div class="gift-label">MUSIC🫂</div>
+                </div>           
+            </div>
+        </div>
+
+        <!-- Screen 5: Letter -->
+        <div class="screen" id="screen-letter">
+            <div class="message-box">
+                <div class="title" style="font-size: 32px;">My Heart's Words 💕</div>
+                <div class="message-text">
+                    <p>Distance has a quiet way of testing the heart, but it has also shown me just how deeply mine is tied to you. Even across miles, you are present in my everyday moments—in the way I smile at my phone, in the songs that suddenly feel like they were written just for us, and in the calm I feel knowing there is someone out there who understands me the way you do. Loving you from afar has taught me patience, trust, and the beauty of anticipation, and for all of that, I am grateful.</p>
+
+                    <p>Some days, I imagine the simple things more than the grand ones. I imagine sitting beside you without checking the time, hearing your voice without a screen between us, and sharing silence that feels comfortable instead of empty. Until that day comes, I hold onto our conversations, our laughter, and the little promises we make to each other. They remind me that what we have is real, even when the distance feels heavy.</p>
+
+                    <p>What I admire most about you is not just who you are, but how you make me feel—seen, valued, and understood. You inspire me to be softer where I used to be guarded, braver where I once hesitated, and more hopeful about what love can be. Even from far away, you bring light into my life, and that is something distance can never take away.</p>
+
+                    <p>This Valentine’s Day, I want you to know that my heart chooses you, again and again. No matter how many days or miles stand between us, I believe in what we’re building and in the day when distance will be just a memory we smile about. Until then, carry my love with you, just as I carry yours with me—always, patiently, and with so much hope for our future.</p>
+                    
+                    <p style="text-align: center; margin-top: 25px; font-weight: bold;">Forever yours Marvin💕</p>
+                </div>
+                <div style="margin-top: 20px; font-size: 14px; color: #B0E0E6;">
+                    You have become my strength and weakness at te same time:
+                    <br>
+                    Lucky I am 💕 You rock 🎸
+                </div>
+                <button class="back-button" onclick="nextScreen(4)">Love please Choose Another Gift😍</button>
+            </div>
+        </div>
+
+        <!-- Screen 6: Camera/Memory -->
+        <div class="screen" id="screen-camera">
+            <div class="message-box">
+                <div class="title" style="font-size: 32px;">Our Memories</div>
+                <div class="photo-grid" id="photoGrid">
+                    <div class="photo-placeholder" onclick="selectPhoto(0)">
+                        <div class="photo-icon">📸</div>
+                        <div class="photo-label">Add Photo</div>
+                        <button class="delete-photo" onclick="deletePhoto(event, 0)">✕</button>
+                    </div>
+                    <div class="photo-placeholder" onclick="selectPhoto(1)">
+                        <div class="photo-icon">📸</div>
+                        <div class="photo-label">Add Photo</div>
+                        <button class="delete-photo" onclick="deletePhoto(event, 1)">✕</button>
+                    </div>
+                    <div class="photo-placeholder" onclick="selectPhoto(2)">
+                        <div class="photo-icon">📸</div>
+                        <div class="photo-label">Add Photo</div>
+                        <button class="delete-photo" onclick="deletePhoto(event, 2)">✕</button>
+                    </div>
+                    <div class="photo-placeholder" onclick="selectPhoto(3)">
+                        <div class="photo-icon">📸</div>
+                        <div class="photo-label">Add Photo</div>
+                        <button class="delete-photo" onclick="deletePhoto(event, 3)">✕</button>
+                    </div>
+                </div>
+                <input type="file" id="photoInput" class="hidden-input" accept="image/*" onchange="handlePhotoUpload(event)">
+                <div class="message-text" style="font-size: 14px;">
+                    It's sad that we have never taken any pic togrther but please
+                    Click on any spot to add your favorite photos and create your memory collection! 📷💕
+                </div>
+                <button class="back-button" onclick="nextScreen(4)"> please Choose Another Gift😘</button>
+            </div>
+        </div>
+
+        <!-- Screen 7: Voucher -->
+        <div class="screen" id="screen-voucher">
+            <div class="message-box">
+                <div class="title" style="font-size: 32px;">Gift Vouchers</div>
+               
+                <div class="voucher">
+                    <div class="voucher-title">🎬 Movie Night Voucher</div>
+                    <div class="voucher-text">
+                        Redeemable for one dreamy movie night where we disappear into our own cozy sanctuary — wrapped in blankets, sharing sweet treats, with nothing between us but laughter, whispers, and the soft glow of the screen.
+                    </div>
+                </div>
+
+                <div class="voucher">
+                    <div class="voucher-title">🍫sweet Chocolate & Cake 🍰</div>
+                    <div class="voucher-text">
+                       Redeemable for a cake baked with love and delivered to you, alongside a sweet escape where time slows down as we share warm honey coffee and each other's company.
+                    </div>
+                </div>
+
+                <button class="back-button" onclick="nextScreen(4)"> Please Choose Another Gift</button>
+            </div>
+        </div>
+
+        <!-- Screen 8: Time -->
+        <div class="screen" id="screen-time">
+            <div class="message-box">
+                <div class="title" style="font-size: 32px;">Quality Time</div>
+                <div class="message-text">
+                   <p>Time is the most precious thing I can offer you, because it is the one thing I can never replace. Every moment I choose to give you is a quiet promise that you matter, that you are worth my attention, my patience, and my presence. In a world that constantly rushes forward, choosing to slow down for you feels like an act of love in its purest form.</p>
+
+                    <p>When I give you my time, I give you more than minutes and hours. I give you my listening, my thoughts, and my heart fully present with you. It is in those moments—whether filled with laughter, deep conversations, or comfortable silence—that love grows strongest. Time allows us to understand each other beyond words and to build something that feels steady and real.</p>
+
+                    <p>Distance and life may demand pieces of our days, but the time we intentionally share becomes sacred. It is in waiting, in choosing each other again despite obstacles, that time transforms into devotion. Each shared moment becomes a memory, and each memory becomes proof that love is not measured by proximity, but by commitment.</p>
+
+                    <p>So when I give you my time, know that I am giving you my trust, my care, and my hope for everything we are becoming together. I choose to spend my days, my thoughts, and my future moments loving you—not because I have time, but because you are worth every second.</p>
+                    
+                </div>
+                <div style="margin: 30px 0; font-size: 60px;">⏰💕</div>
+                <div class="message-text" style="font-size: 14px; color: #B0E0E6;">
+                    Marvin you are the one I look forward to spend the rest of my life with
+                </div>
+                <button class="back-button" onclick="nextScreen(4)">Hey Marvin please choose Another Gift</button>
+            </div>
+        </div>
+
+        <!-- Screen 9: Music -->
+        <div class="screen" id="screen-music">
+            <div class="message-box">
+                <div class="title" style="font-size: 32px;">Our Playlist 🎵</div>
+                <div class="message-text" style="font-size: 14px; margin-bottom: 30px;">
+                    Songs that remind me of us 💕
+                </div>
+               
+                <div class="playlist">
+                    <div class="song-item" onclick="playSong(0, this)">
+                        <div class="song-icon">🎵</div>
+                        <div class="song-info">
+                            <div class="song-title">When You Say Nothing At All</div>
+                            <div class="song-subtitle">Our song</div>
+                        </div>
+                        <div class="play-btn">▶️</div>
+                    </div>
+
+                    <div class="song-item" onclick="playSong(1, this)">
+                        <div class="song-icon">🎵</div>
+                        <div class="song-info">
+                            <div class="song-title">All I Ever Need - Austine Mahone</div>
+                            <div class="song-subtitle">When I think of you</div>
+                        </div>
+                        <div class="play-btn">▶️</div>
+                    </div>
+
+                    <div class="song-item" onclick="playSong(2, this)">
+                        <div class="song-icon">🎵</div>
+                        <div class="song-info">
+                            <div class="song-title">All of Me - John Legend</div>
+                            <div class="song-subtitle">My heart is yours</div>
+                        </div>
+                        <div class="play-btn">▶️</div>
+                    </div>
+
+                    <div class="song-item" onclick="playSong(3, this)">
+                        <div class="song-icon">🎵</div>
+                        <div class="song-info">
+                            <div class="song-title">Rewrite The Star - Anne ft James Arthur</div>
+                            <div class="song-subtitle">Forever with you</div>
+                        </div>
+                        <div class="play-btn">▶️</div>
+                    </div>
+
+                    <div class="song-item" onclick="playSong(4, this)">
+                        <div class="song-icon">🎵</div>
+                        <div class="song-info">
+                            <div class="song-title">Meant to Be - Bebe Rexha</div>
+                            <div class="song-subtitle">Always and forever</div>
+                        </div>
+                        <div class="play-btn">▶️</div>
+                    </div>
+                </div>
+                <div class="music-player" id="musicPlayer">
+                    <div class="now-playing" id="nowPlaying">Select a song to play 🎶</div>
+                    <iframe 
+                        id="spotifyPlayer" 
+                        style="border-radius:12px; margin-top: 15px; width: 100%;" 
+                        src="" 
+                        height="152" 
+                        frameBorder="0" 
+                        allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <button class="back-button" onclick="nextScreen(4)">HAPPY VALENTINE'S DAY MARVIN🥰</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Store photos in localStorage to persist them
+        let currentPhotoIndex = null;
+        let photos = JSON.parse(localStorage.getItem('valentinePhotos')) || [null, null, null, null];
+
+        // Load saved photos on page load
+        window.addEventListener('load', function() {
+            loadSavedPhotos();
+            createHearts();
+        });
+
+        // Create floating hearts
+        function createHearts() {
+            const hearts = document.getElementById('hearts');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '🤍';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                hearts.appendChild(heart);
+            }
+        }
+
+        // Navigate between screens
+        function nextScreen(screenNumber) {
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => screen.classList.remove('active'));
+            document.getElementById('screen' + screenNumber).classList.add('active');
+        }
+
+        // Show specific gift screen
+        function showGift(giftType) {
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => screen.classList.remove('active'));
+            document.getElementById('screen-' + giftType).classList.add('active');
+        }
+
+        // Handle "No" button with both mouse and touch events
+        let noClickCount = 0;
+        let lastMoveTime = 0;
+       
+        // Mouse movement (desktop)
+        document.addEventListener('mousemove', function(e) {
+            const screen3 = document.getElementById('screen3');
+            if (!screen3.classList.contains('active')) return;
+           
+            const button = document.getElementById('noButton');
+            if (!button) return;
+           
+            const buttonRect = button.getBoundingClientRect();
+            const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+            const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+           
+            const distance = Math.sqrt(
+                Math.pow(e.clientX - buttonCenterX, 2) +
+                Math.pow(e.clientY - buttonCenterY, 2)
+            );
+           
+            if (distance < 100) {
+                moveNoButton();
+            }
+        });
+        
+        // Touch events (mobile)
+        document.addEventListener('touchstart', function(e) {
+            const screen3 = document.getElementById('screen3');
+            if (!screen3.classList.contains('active')) return;
+            
+            const button = document.getElementById('noButton');
+            if (!button) return;
+            
+            const touch = e.touches[0];
+            const buttonRect = button.getBoundingClientRect();
+            
+            // Check if touch is on or near the button
+            const touchX = touch.clientX;
+            const touchY = touch.clientY;
+            
+            const isNearButton = (
+                touchX >= buttonRect.left - 50 &&
+                touchX <= buttonRect.right + 50 &&
+                touchY >= buttonRect.top - 50 &&
+                touchY <= buttonRect.bottom + 50
+            );
+            
+            if (isNearButton) {
+                e.preventDefault();
+                moveNoButton();
+            }
+        }, { passive: false });
+        
+        // Also move on touchmove for continuous tracking
+        document.addEventListener('touchmove', function(e) {
+            const screen3 = document.getElementById('screen3');
+            if (!screen3.classList.contains('active')) return;
+            
+            const button = document.getElementById('noButton');
+            if (!button) return;
+            
+            // Throttle to avoid too many moves
+            const now = Date.now();
+            if (now - lastMoveTime < 200) return;
+            lastMoveTime = now;
+            
+            const touch = e.touches[0];
+            const buttonRect = button.getBoundingClientRect();
+            
+            const touchX = touch.clientX;
+            const touchY = touch.clientY;
+            
+            const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+            const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+            
+            const distance = Math.sqrt(
+                Math.pow(touchX - buttonCenterX, 2) +
+                Math.pow(touchY - buttonCenterY, 2)
+            );
+            
+            if (distance < 150) {
+                moveNoButton();
+            }
+        });
+       
+        function moveNoButton() {
+            const button = document.getElementById('noButton');
+            const container = document.querySelector('.container');
+           
+            const containerRect = container.getBoundingClientRect();
+            const buttonRect = button.getBoundingClientRect();
+           
+            const maxX = containerRect.width - buttonRect.width - 40;
+            const maxY = containerRect.height - buttonRect.height - 40;
+           
+            const randomX = Math.random() * maxX + 20;
+            const randomY = Math.random() * maxY + 20;
+           
+            button.style.position = 'absolute';
+            button.style.left = randomX + 'px';
+            button.style.top = randomY + 'px';
+            button.style.transition = 'all 0.3s ease';
+        }
+
+        function handleNo() {
+            noClickCount++;
+           
+            if (noClickCount >= 5) {
+                alert("Wow, you're persistent! But you know the answer is YES! 💕");
+                nextScreen(4);
+            } else {
+                moveNoButton();
+            }
+        }
+
+        // Photo upload functions
+        function selectPhoto(index) {
+            currentPhotoIndex = index;
+            document.getElementById('photoInput').click();
+        }
+
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+               
+                reader.onload = function(e) {
+                    const photoData = e.target.result;
+                    photos[currentPhotoIndex] = photoData;
+                    localStorage.setItem('valentinePhotos', JSON.stringify(photos));
+                    displayPhoto(currentPhotoIndex, photoData);
+                };
+               
+                reader.readAsDataURL(file);
+            }
+           
+            event.target.value = '';
+        }
+
+        function displayPhoto(index, photoData) {
+            const photoPlaceholders = document.querySelectorAll('.photo-placeholder');
+            const placeholder = photoPlaceholders[index];
+           
+            let img = placeholder.querySelector('img');
+            if (!img) {
+                img = document.createElement('img');
+                placeholder.appendChild(img);
+            }
+            img.src = photoData;
+           
+            placeholder.classList.add('has-image');
+        }
+
+        function deletePhoto(event, index) {
+            event.stopPropagation();
+           
+            photos[index] = null;
+            localStorage.setItem('valentinePhotos', JSON.stringify(photos));
+           
+            const photoPlaceholders = document.querySelectorAll('.photo-placeholder');
+            const placeholder = photoPlaceholders[index];
+           
+            const img = placeholder.querySelector('img');
+            if (img) {
+                img.remove();
+            }
+           
+            placeholder.classList.remove('has-image');
+        }
+
+        function loadSavedPhotos() {
+            photos.forEach((photoData, index) => {
+                if (photoData) {
+                    displayPhoto(index, photoData);
+                }
+            });
+        }
+
+        // Play song function
+        function playSong(songIndex, element) {
+            const songs = [
+                {
+                    title: "When You Say Nothing At All - Ronan Keating",
+                    spotifyId: "0gcjc7Vt5xtcfmJgf6g2IO?si=e75d3d06ef8e45dc"
+                },
+                {
+                    title: "All I Ever Need - Austin Mahone",
+                    spotifyId: "04Aw2jdHNkLAR9LWUIGf2b?si=373ef508477d4a9a"
+                },
+                {
+                    title: "All of Me - John Legend",
+                    spotifyId: "3U4isOIWM3VvDubwSI3y7a"
+                },
+                {
+                    title: "Rewrite The Stars - James Arthur & Anne-Marie",
+                    spotifyId: "7FlHNJT4TC120CDvFOHzei?si=1fda8273c4624ca9"
+                },
+                {
+                    title: "Meant to Be - Bebe Rexha & Florida Georgia Line",
+                    spotifyId: "7iDa6hUg2VgEL1o1HjmfBn?si=b9f60e268a6f4580"
+                }
+            ];
+
+            // Remove 'playing' class from all songs
+            document.querySelectorAll('.song-item').forEach(item => {
+                item.classList.remove('playing');
+            });
+
+            // Add 'playing' class to current song
+            element.classList.add('playing');
+
+            // Update now playing text
+            document.getElementById('nowPlaying').textContent = 'Now Playing: ' + songs[songIndex].title;
+
+            // Update Spotify embed
+            const spotifyPlayer = document.getElementById('spotifyPlayer');
+            const embedUrl = `https://open.spotify.com/embed/track/${songs[songIndex].spotifyId}`;
+            
+            console.log('Loading Spotify track:', embedUrl);
+            spotifyPlayer.src = embedUrl;
+        }
+    </script>
+</body>
+</html>
